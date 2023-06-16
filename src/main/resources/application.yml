@@ -1,0 +1,33 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/screw?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true # ???? sql ??
+    properties:
+      hibernate:
+        format_sql: true # sql ??? ??
+        default_batch_fetch_size: 500 # ??? ??? ?? ? ?? ???
+    open-in-view: false # ??? ????? ?? ??? ???? ??? ??
+
+  servlet:
+    multipart:
+      max-file-size: 10MB # ?? ??? ?? ? ??? ?? ??? 10MB ??
+      max-request-size: 100MB # ?? ??? ?? ? ?? ?? ???? 100MB ??
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+logging.level:
+  org.hibernate.SQL: debug
