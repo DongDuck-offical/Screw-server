@@ -2,7 +2,7 @@ package dongduck.screw.domain.registration;
 
 import dongduck.screw.domain.base.BaseTimeEntity;
 import dongduck.screw.domain.board.Board;
-import dongduck.screw.domain.member.Member;
+import dongduck.screw.domain.user.User;
 
 import javax.persistence.*;
 
@@ -14,9 +14,9 @@ public class Registration extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "memberId")
+    @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private User user;
 
     @JoinColumn(name = "boardId")
     @ManyToOne(fetch = FetchType.LAZY)

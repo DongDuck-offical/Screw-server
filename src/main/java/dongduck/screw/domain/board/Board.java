@@ -3,7 +3,7 @@ package dongduck.screw.domain.board;
 import dongduck.screw.domain.base.BaseTimeEntity;
 import dongduck.screw.domain.enumType.Sport;
 import dongduck.screw.domain.likes.Likes;
-import dongduck.screw.domain.member.Member;
+import dongduck.screw.domain.user.User;
 
 
 import javax.persistence.*;
@@ -16,9 +16,9 @@ public class Board extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name="memberId")
+    @JoinColumn(name="userId")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Member member;
+    private User user;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Likes> likeList = new ArrayList<>();

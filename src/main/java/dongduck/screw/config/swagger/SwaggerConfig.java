@@ -26,8 +26,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("API 문서")
-                .description("API 문서를 위한 Swagger 설정")
+                .title("SCREW")
+                .description("SCREW API 명세서")
                 .version("1.0.0")
                 .build();
     }
