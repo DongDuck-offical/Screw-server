@@ -1,13 +1,11 @@
 package dongduck.screw.web.controller;
 
-import dongduck.screw.domain.user.User;
 import dongduck.screw.dto.user.SignupDto;
 import dongduck.screw.dto.user.UserDto;
 import dongduck.screw.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

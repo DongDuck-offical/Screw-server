@@ -2,7 +2,7 @@ package dongduck.screw.domain.user;
 
 import dongduck.screw.domain.base.BaseTimeEntity;
 import dongduck.screw.domain.board.Board;
-import dongduck.screw.domain.enumType.Role;
+import dongduck.screw.domain.enumType.RoleType;
 import dongduck.screw.dto.user.SignupDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,7 +37,7 @@ public class User extends BaseTimeEntity {
     private String area;
 
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private RoleType role;
 
 
     public static User createUser(SignupDto signupDto){
