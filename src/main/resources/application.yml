@@ -4,7 +4,6 @@ server:
     context-path: /
 
 spring:
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/screw?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
@@ -48,7 +47,13 @@ spring:
             client-name: Kakao
             client-authentication-method: POST
 
-
+          google:
+            clientId: '172277634523-98tafp4js0ak28gmctajdeu3hl6vr8pn.apps.googleusercontent.com'
+            clientSecret: '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'
+            redirect-uri: http://localhost:8081/login/oauth2/code/google
+            scope:
+              - email
+              - profile
 
   mvc:
     pathmatch:
