@@ -18,13 +18,6 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public UserDto signup(SignupDto signupDto){
-        User user = User.createUser(signupDto);
-        userRepository.save(user);
-        return new UserDto(user.getUsername(),user.getPassword());
-    }
-
-    @Transactional
     public List<UserDto> findAll(){
         List<User> userList = userRepository.findAll();
         return userList.stream()

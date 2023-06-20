@@ -3,7 +3,6 @@ package dongduck.screw.domain.user;
 import dongduck.screw.domain.base.BaseTimeEntity;
 import dongduck.screw.domain.board.Board;
 import dongduck.screw.domain.enumType.RoleType;
-import dongduck.screw.dto.user.SignupDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,24 +28,13 @@ public class User extends BaseTimeEntity {
     @OneToMany(mappedBy = "user", fetch = LAZY)
     private List<Board> boardList = new ArrayList<>();
 
-    private String username;
+    private String email; //unique
     private String name;
     private String password;
-    private String email;
     private String profileImageUrl;
     private String area;
 
     @Enumerated(EnumType.STRING)
     private RoleType role;
-
-
-    public static User createUser(SignupDto signupDto){
-        User user = User.builder()
-                .username(signupDto.getUsername())
-                .name(signupDto.getName())
-                .password(signupDto.getPassword()).build();
-        return user;
-    }
-
 
 }

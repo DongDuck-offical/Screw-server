@@ -1,9 +1,10 @@
 server:
-  port: 8080
+  port: 8081
   servlet:
     context-path: /
 
 spring:
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/screw?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
@@ -13,17 +14,41 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    show-sql: true # ???? sql ??
+    show-sql: true
     properties:
       hibernate:
-        format_sql: true # sql ??? ??
-        default_batch_fetch_size: 500 # ??? ??? ?? ? ?? ???
-    open-in-view: false # ??? ????? ?? ??? ???? ??? ??
+        format_sql: true
+        default_batch_fetch_size: 500
+    open-in-view: false
 
   servlet:
     multipart:
-      max-file-size: 10MB # ?? ??? ?? ? ??? ?? ??? 10MB ??
-      max-request-size: 100MB # ?? ??? ?? ? ?? ?? ???? 100MB ??
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+  security:
+    oauth2:
+      client:
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+        registration:
+          kakao:
+            clientId: 'c4957dae238f06a38023a0dc6d8a3470'
+            client-secret: 'w6kaWJJfKcyRdztikP6iUHjH1iQD8M6Y'
+            redirect-uri: http://localhost:8081/login/oauth2/code/kakao
+            authorization-grant-type: authorization_code
+            scope:
+              - profile_nickname
+              - account_email
+              - profile_image
+            client-name: Kakao
+            client-authentication-method: POST
+
+
 
   mvc:
     pathmatch:
