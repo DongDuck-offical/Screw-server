@@ -60,6 +60,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
 
             userRepository.save(user);
 
+
         }
 
         Token token = tokenService.generateToken(email, "USER");
@@ -67,12 +68,12 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         //응답 헤더에 Auth, Refresh 추가
         writeTokenResponse(response, token);
 
-        String uri = UriComponentsBuilder.fromUriString("http://localhost:8081/getToken")
+        String uri = UriComponentsBuilder.fromUriString("http://localhost:3000")
                 .queryParam("email",email)
                 .queryParam("token",token)
                 .build().toString();
 
-        System.out.println("==========OAuth2SuccessHandler 실행 끝===========");
+        log.info("==========OAuth2SuccessHandler 실행 끝===========");
         //이 부분은 원래 프론트 서버로 redirect해야함
         response.sendRedirect(uri);
 

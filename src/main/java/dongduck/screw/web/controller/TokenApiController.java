@@ -6,6 +6,8 @@ import dongduck.screw.config.token.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,8 +24,14 @@ public class TokenApiController {
 
     //프론트 서버로부터 인가코드를 받아서 로그인 처리
     // -> 시큐리티가 요청을 먼저 낚아 채서 컨트롤러가 별도로 필요 없다고 앎.
-    @GetMapping("/login/oauth2/code/google")
-    public void googleCallback(@RequestParam("code") String code){}
+//    @GetMapping("/login")
+//    public String oauthLogin(Authentication authentication){
+//        OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+//        Map<String, Object> attributes = oAuth2User.getAttributes();
+//
+//        return attributes.toString();
+//
+//    }
 
 
     //로그인 완료 후에 토큰 발급이 제대로 되었는지 확인
