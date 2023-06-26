@@ -7,6 +7,7 @@ import dongduck.screw.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -24,6 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final TokenService tokenService;
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
+
+
     @Bean
     public BCryptPasswordEncoder encode() {
         return new BCryptPasswordEncoder();
@@ -33,6 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        //Preflight Request OPTIONS 메소드 요청을 허용
+        http.authorizeRequests()
+                        .mvcMatchers(HttpMethod.OPTIONS,"/**").permitAll();
 
         //인가 코드의 전송 과정은 Spring Security에서 내부적으로 처리
         http.oauth2Login() //oauth2 로그인 프로세스
