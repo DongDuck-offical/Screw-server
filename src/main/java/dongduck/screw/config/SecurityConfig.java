@@ -25,8 +25,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final TokenService tokenService;
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
-
-
     @Bean
     public BCryptPasswordEncoder encode() {
         return new BCryptPasswordEncoder();

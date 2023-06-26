@@ -9,6 +9,7 @@ import dongduck.screw.domain.user.User;
 import dongduck.screw.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -73,8 +74,10 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
                 .queryParam("token",token)
                 .build().toString();
 
-        log.info("==========OAuth2SuccessHandler 실행 끝===========");
         //이 부분은 원래 프론트 서버로 redirect해야함
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Access-Control-Allow-Origin", "http://localhost:3000");
         response.sendRedirect(uri);
 
     }
