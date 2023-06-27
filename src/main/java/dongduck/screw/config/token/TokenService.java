@@ -20,11 +20,13 @@ public class TokenService {
     }
 
     public Token generateToken(String uid, String role) {
-        long tokenPeriod = 1000L * 60L * 10L;
-        long refreshPeriod = 1000L * 60L * 60L * 24L * 30L * 3L;
 
-        Claims claims = Jwts.claims().setSubject(uid);
-        claims.put("role", role);
+        long tokenPeriod = 1000L * 60L * 10L; //10분
+        long refreshPeriod = 1000L * 60L * 60L * 24L * 30L * 3L; //3개월
+
+
+        Claims claims = Jwts.claims().setSubject(uid); //토큰 클레임 생성
+        claims.put("role", role); //클레임에 "role"만 추가
 
         Date now = new Date();
         return new Token(

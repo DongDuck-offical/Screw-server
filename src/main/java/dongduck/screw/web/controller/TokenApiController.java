@@ -22,15 +22,6 @@ public class TokenApiController {
 
     //프론트 서버로부터 인가코드를 받아서 로그인 처리
     // -> 시큐리티가 요청을 먼저 낚아 채서 컨트롤러가 별도로 필요 없다고 앎.
-    @GetMapping("/kakaologin")
-    public String oauthLogin(@RequestParam("code") String code){
-        System.out.println("==============");
-        System.out.println(code);
-        System.out.println("=============");
-
-        return code;
-
-    }
 
 
     //로그인 완료 후에 토큰 발급이 제대로 되었는지 확인

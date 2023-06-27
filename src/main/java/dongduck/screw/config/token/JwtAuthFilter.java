@@ -1,4 +1,4 @@
-package dongduck.screw.config;
+package dongduck.screw.config.token;
 
 import dongduck.screw.config.token.TokenService;
 import dongduck.screw.domain.user.User;
