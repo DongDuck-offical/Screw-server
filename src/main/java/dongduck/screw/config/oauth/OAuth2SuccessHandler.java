@@ -65,8 +65,6 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             writeTokenResponse(response, token);
 
             String uri = UriComponentsBuilder.fromUriString("http://localhost:3000/addition")
-                    .queryParam("email",email)
-                    .queryParam("token",token)
                     .build().toString();
 
             //클라이언트로 리다이렉트
@@ -83,7 +81,6 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
         }
 
     }
-
 
     private void writeTokenResponse(HttpServletResponse response, Token token) throws IOException {
         response.setContentType("text/html;charset=UTF-8");
