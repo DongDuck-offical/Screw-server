@@ -67,8 +67,8 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             String uri = UriComponentsBuilder.fromUriString("http://localhost:3000/addition")
                     .build().toString();
 
-            //클라이언트로 리다이렉트
-            response.sendRedirect(uri);
+//            //클라이언트로 리다이렉트
+//            response.sendRedirect(uri);
         }else{
             Token token = tokenService.generateToken(email, "USER");
             writeTokenResponse(response, token);
@@ -76,8 +76,8 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             String uri = UriComponentsBuilder.fromUriString("http://localhost:3000/")
                     .build()
                     .toString();
-
-            response.sendRedirect(uri);
+//            //클라이언트로 리다이렉트
+//            response.sendRedirect(uri);
         }
 
     }

@@ -45,8 +45,7 @@ dependencies {
     //서버 재시작 라이브러리
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    // @EnableResourceServer 사용
-    implementation 'org.springframework.security.oauth:spring-security-oauth2:2.3.3.RELEASE'}
+}
 
 tasks.named('test') {
     useJUnitPlatform()
