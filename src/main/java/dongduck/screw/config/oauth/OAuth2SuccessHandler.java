@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -27,7 +28,7 @@ import java.util.UUID;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
+public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
     private final TokenService tokenService;
     private final UserRequestMapper userRequestMapper;
     private final UserRepository userRepository;
@@ -61,33 +62,46 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             //토큰 생성
             Token token = tokenService.generateToken(email, "USER");
 
-            //응답 헤더에 Auth, Refresh 추가
-            writeTokenResponse(response, token);
+            //최초 User
+            boolean isNewUser = true;
 
-            String uri = UriComponentsBuilder.fromUriString("http://localhost:3000/addition")
+            //응답 헤더에 Auth, Refresh 추가
+            writeTokenResponse(response, token, isNewUser);
+
+            //리다이렉트할 uri 생성
+            String uri = UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect")
                     .build().toString();
 
-//            //클라이언트로 리다이렉트
+            //클라이언트로 리다이렉트
 //            response.sendRedirect(uri);
+            getRedirectStrategy().sendRedirect(request,response,uri);
+
         }else{
+            //토큰 생성
             Token token = tokenService.generateToken(email, "USER");
-            writeTokenResponse(response, token);
 
-            String uri = UriComponentsBuilder.fromUriString("http://localhost:3000/")
-                    .build()
-                    .toString();
-//            //클라이언트로 리다이렉트
+            //이미 있는 User
+            boolean isNewUser = false;
+
+            //응답 헤더에 Auth, Refresh 추가
+            writeTokenResponse(response, token, isNewUser);
+
+            //리다이렉트할 uri 생성
+            String uri = UriComponentsBuilder.fromUriString("http://localhost:3000/oauth2/redirect")
+                    .build().toString();
+
+            //클라이언트로 리다이렉트
 //            response.sendRedirect(uri);
+            getRedirectStrategy().sendRedirect(request,response,uri);
         }
-
     }
 
-    private void writeTokenResponse(HttpServletResponse response, Token token) throws IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
+    private void writeTokenResponse(HttpServletResponse response, Token token, boolean isNewUser) throws IOException {
+//        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("application/json;charset=UTF-8");
         response.addHeader("Auth", token.getToken());
         response.addHeader("Refresh", token.getRefreshToken());
-        response.setContentType("application/json;charset=UTF-8");
+        response.addHeader("Is-New-User", String.valueOf(isNewUser));
 
     }
 }
